@@ -1,5 +1,9 @@
 import Image from "next/image";
+import { Oswald, Inter } from "next/font/google";
 import logo from "../../../../public/logo.png";
+
+const oswald = Oswald();
+const inter = Inter();
 
 const Footer = () => {
   return (
@@ -12,10 +16,10 @@ const Footer = () => {
           className="origin-center rotate-135"
           width={20}
         ></Image>
-        <h3 className="font-bold text-white">FITLOG</h3>
+        <h3 className={`${oswald.className} font-bold text-white`}>FITLOG</h3>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-        <p className="text-xs text-[#6b7280FF]">
+        <p className={`${inter.className} text-xs text-[#6b7280FF]`}>
           © 2026 FitLog — Workout Library. Train hard, log honest.
         </p>
       </nav>
