@@ -36,7 +36,7 @@ const WorkCard = ({ data }: IDataCardProps) => {
           ))}
         </div>
         <h2
-          className={`${oswald.className} not-[]:text-sm font-extrabold uppercase tracking-wide`}
+          className={`${oswald.className} text-lg font-extrabold uppercase`}
         >
           {data.name}
         </h2>
