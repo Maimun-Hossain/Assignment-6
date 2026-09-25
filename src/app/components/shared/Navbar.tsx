@@ -5,7 +5,7 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link href="/workouts" className="text-[#9ca3afFF]">
+        <Link href="/" className="text-[#9ca3afFF]">
           Workouts
         </Link>
       </li>
@@ -17,7 +17,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar max-w-[97%] mx-auto">
+    <div className="navbar md:px-0 max-w-[97%] mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

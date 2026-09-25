@@ -3,7 +3,7 @@ import logo from "../../../../public/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="footer max-w-[97%] mx-auto sm:footer-horizontal text-neutral-content items-center p-4">
+    <footer className="footer md:px-0 max-w-[97%] mx-auto sm:footer-horizontal text-neutral-content items-center p-4">
       <aside className="grid-flow-col items-center">
         <Image
           src={logo}
