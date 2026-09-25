@@ -1,7 +1,7 @@
 import React from "react";
 import { Oswald, Inter } from "next/font/google";
-import WorkCard from "../shared/WorkCard";
 import { IData } from "@/types/datas.type";
+import WorkCard from "../components/shared/WorkCard";
 
 const oswald = Oswald();
 const inter = Inter();
