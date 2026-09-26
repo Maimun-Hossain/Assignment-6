@@ -8,21 +8,22 @@ import AddSaveBtn from "@/app/components/PlanDetails/AddSaveBtn";
 const oswald = Oswald();
 const inter = Inter();
 
-interface IDataDetailsPageProps {
+interface IDataDetailsPageProps{
   params: Promise<{
     id: string;
   }>;
 }
 
 const getData = async () => {
-  try {
-    const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
+  try{
+    const res = await fetch("https://api.api-store.workers.dev/api/fitlog", {
       next: { revalidate: 3600 },
     });
-    if (!res.ok) return [];
+    if(!res.ok) return [];
     const data = await res.json();
     return Array.isArray(data) ? data : [];
-  } catch {
+  }
+  catch{
     return [];
   }
 };
@@ -33,7 +34,7 @@ const page = async ({ params }: IDataDetailsPageProps) => {
   const work = workoutData.find(
     (data: IData) => data.id === Number(id),
   ) as IData;
-  if (!work) notFound();
+  if(!work) notFound();
   return (
     <main className="max-w-[97%] mx-auto py-8 text-white">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">

@@ -11,11 +11,11 @@ const AddPlanBtn = ({ work }: { work: IData }) => {
   const atLimit = addPlan.length >= 5;
 
   const handleAddPlan = () => {
-    if (alreadyAdded) {
+    if(alreadyAdded){
       toast.info("This workout is already in today's plan.");
       return;
     }
-    if (atLimit) {
+    if(atLimit){
       toast.info("Today's plan is limited to five workouts.");
       return;
     }

@@ -10,7 +10,7 @@ const AddSaveBtn = ({ work }: { work: IData }) => {
   const alreadySaved = addSave.some((item) => item.id === work.id);
 
   const handleSave = () => {
-    if (alreadySaved) {
+    if(alreadySaved){
       toast.info("This workout is already saved.");
       return;
     }
