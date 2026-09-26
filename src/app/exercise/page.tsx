@@ -7,14 +7,20 @@ const oswald = Oswald();
 const inter = Inter();
 
 const getData = async () => {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
 };
 
 const Library = async () => {
   const workoutData = await getData();
-  console.log(workoutData);
   return (
     <section className="max-w-[97%] mx-auto">
       <div>
@@ -29,9 +35,7 @@ const Library = async () => {
       </div>
       <div className="grid mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {workoutData.map((data: IData) => {
-          return (
-            <WorkCard key={data.id} data={data} />
-          );
+          return <WorkCard key={data.id} data={data} />;
         })}
       </div>
     </section>

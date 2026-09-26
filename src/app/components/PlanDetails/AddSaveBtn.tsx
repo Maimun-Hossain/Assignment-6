@@ -1,22 +1,32 @@
 "use client";
-import { DataContext } from '@/context/DataProvider';
-import { IData } from '@/types/datas.type';
-import React, { useContext } from 'react';
-import { FaRegBookmark } from 'react-icons/fa6';
-import { toast } from 'react-toastify';
+import { DataContext } from "@/context/DataProvider";
+import type { IData } from "@/types/datas.type";
+import { useContext } from "react";
+import { FaRegBookmark } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
-const AddSaveBtn = ({work}: {work: IData}) => {
-    const {addSave, SetAddSave} = useContext(DataContext);
+const AddSaveBtn = ({ work }: { work: IData }) => {
+  const { addSave, SetAddSave } = useContext(DataContext);
+  const alreadySaved = addSave.some((item) => item.id === work.id);
 
-    const handleSave = () => {
-        SetAddSave([...addSave, work]);
-        toast.success(`Added in Save ${work.name}`);
+  const handleSave = () => {
+    if (alreadySaved) {
+      toast.info("This workout is already saved.");
+      return;
     }
-    return (
-        <button onClick={()=> handleSave()} className="rounded-lg border border-[#343945] px-5 py-2.5 text-xs text-gray-300 hover:bg-[#181b22] flex gap-2 items-center cursor-pointer">
-              <FaRegBookmark /> Save for later
-            </button>
-    );
+    SetAddSave((currentSave) => [...currentSave, work]);
+    toast.success(`${work.name} Workout saved for later.`);
+  };
+
+  return (
+    <button
+      onClick={handleSave}
+      disabled={alreadySaved}
+      className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#343945] px-5 py-2.5 text-xs text-gray-300 hover:bg-[#181b22] disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <FaRegBookmark /> Save for later
+    </button>
+  );
 };
 
 export default AddSaveBtn;

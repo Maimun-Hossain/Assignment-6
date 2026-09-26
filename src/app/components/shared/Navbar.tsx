@@ -1,29 +1,35 @@
+"use client";
 import Image from "next/image";
 import { Oswald, Inter } from "next/font/google";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useContext } from "react";
+import { DataContext } from "@/context/DataProvider";
 import logo from "../../../../public/logo.png";
 const oswald = Oswald();
 const inter = Inter();
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const { addPlan, addSave } = useContext(DataContext);
+  const linkClass = (href: string) =>
+    `transition-colors ${pathname === href ? "bg-[#1a2312FF] rounded-full text-[#c2f800FF]" : "text-[#9ca3afFF] hover:text-white"}`;
   const links = (
     <>
       <li>
-        <Link href="/" className="text-[#9ca3afFF]">
+        <Link href="/" className={linkClass("/")}>
           Workouts
         </Link>
       </li>
       <li>
-        <Link href="/my-plan" className="text-[#9ca3afFF]">
+        <Link href="/my-plan" className={linkClass("/my-plan")}>
           My Plan
         </Link>
       </li>
     </>
   );
   return (
-    <div
-      className={`navbar md:px-0 max-w-[97%] mx-auto ${inter.className}`}
-    >
+    <div className={`navbar md:px-0 max-w-[97%] mx-auto ${inter.className}`}>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,15 +52,18 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={-1}
-            className="menu menu-sm dropdown-content bg-[#0C0D10] rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content z-50 mt-3 w-52 rounded-box bg-[#0C0D10] p-2 shadow"
           >
             {links}
           </ul>
         </div>
         <Image src={logo} alt="logo" width={28} height={28}></Image>
-        <a className={`pl-2 text-xl font-bold text-white ${oswald.className}`}>
+        <Link
+          href="/"
+          className={`pl-2 text-xl font-bold text-white ${oswald.className}`}
+        >
           FITLOG
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
@@ -66,7 +75,7 @@ const Navbar = () => {
         >
           Plan{" "}
           <div className="badge badge-sm bg-[#ccff00] border-none px-2 py-3 rounded-full font-bold">
-            0
+            {addPlan.length}
           </div>
         </Link>
         <Link
@@ -75,7 +84,7 @@ const Navbar = () => {
         >
           Saved{" "}
           <div className="badge badge-sm px-2 py-3 border border-[#9ca3afFF] bg-transparent rounded-full text-white font-bold">
-            0
+            {addSave.length}
           </div>
         </Link>
       </div>

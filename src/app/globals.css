@@ -1,4 +1,10 @@
 @import "tailwindcss";
- @plugin "daisyui" {
-   themes: light --default;
- }
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+html,
+body {
+  min-height: 100%;
+  background-color: #0c0d10;
+}

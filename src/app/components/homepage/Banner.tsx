@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Oswald, Inter } from "next/font/google";
 import banner from "../../../../public/banner.png";
 import { FaArrowDown } from "react-icons/fa6";
+import Link from "next/link";
 
 const oswald = Oswald();
 const inter = Inter();
@@ -15,7 +16,9 @@ const Banner = () => {
           <h6 className="text-xs font-bold text-[#c2f800FF]">
             WORKOUT LIBRARY
           </h6>
-          <h1 className={`${oswald.className} text-5xl font-bold text-white my-5`}>
+          <h1
+            className={`${oswald.className} text-5xl font-bold text-white my-5`}
+          >
             TRAIN WITH INTENT. LOG <br />
             EVERY SET.
           </h1>
@@ -24,9 +27,12 @@ const Banner = () => {
             <br />
             {`into today's plan, and watch the week's work add up.`}
           </p>
-          <button className="btn btn-outline bg-[#c2f800FF] font-bold">
-            BROWSE WORKOUTS<FaArrowDown />
-          </button>
+          <Link
+            href="#library"
+            className="inline-flex items-center gap-2 rounded-md bg-[#c2f800FF] px-5 py-3 text-sm font-bold text-black transition-colors hover:bg-[#b5eb00]"
+          >
+            BROWSE WORKOUTS <FaArrowDown />
+          </Link>
         </div>
       </div>
     </div>

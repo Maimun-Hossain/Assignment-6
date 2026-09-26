@@ -1,7 +1,6 @@
 import { IData } from "@/types/datas.type";
 import Image from "next/image";
 import { Oswald, Inter } from "next/font/google";
-import { FaCalendarPlus, FaRegBookmark } from "react-icons/fa6";
 import { notFound } from "next/navigation";
 import AddPlanBtn from "@/app/components/PlanDetails/AddPlanBtn";
 import AddSaveBtn from "@/app/components/PlanDetails/AddSaveBtn";
@@ -16,9 +15,16 @@ interface IDataDetailsPageProps {
 }
 
 const getData = async () => {
-  const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
 };
 
 const page = async ({ params }: IDataDetailsPageProps) => {
@@ -28,7 +34,6 @@ const page = async ({ params }: IDataDetailsPageProps) => {
     (data: IData) => data.id === Number(id),
   ) as IData;
   if (!work) notFound();
-  console.log(work);
   return (
     <main className="max-w-[97%] mx-auto py-8 text-white">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
@@ -106,16 +111,16 @@ const page = async ({ params }: IDataDetailsPageProps) => {
             <ol className="mt-3 space-y-3 text-xs text-gray-300">
               {work.instructions.map((instruction, index) => (
                 <li key={index} className="flex gap-3">
-                  <span className="text-gray-500">{index + 1}.</span>
+                  <span className="text-[#c6ff00]">{index + 1}.</span>
                   <span>{instruction}</span>
                 </li>
               ))}
             </ol>
           </div>
           <div className="mt-6 flex gap-3">
-            <AddPlanBtn work={work}/>
+            <AddPlanBtn work={work} />
 
-            <AddSaveBtn work={work}/>
+            <AddSaveBtn work={work} />
           </div>
         </div>
       </div>
