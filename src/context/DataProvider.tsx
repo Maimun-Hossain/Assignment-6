@@ -24,35 +24,35 @@ let cachedStorage: string | null | undefined;
 let cachedData = emptyData;
 
 const getStoredData = () => {
-  if (typeof window === "undefined") return emptyData;
+  if(typeof window === "undefined") return emptyData;
 
   const storedData = localStorage.getItem(storageKey);
-  if (storedData === cachedStorage) return cachedData;
+  if(storedData === cachedStorage) return cachedData;
   cachedStorage = storedData;
 
-  if (!storedData) {
+  if(!storedData){
     cachedData = emptyData;
     return cachedData;
   }
 
-  try {
+  try{
     const parsedData = JSON.parse(storedData);
-    cachedData = {
+    cachedData ={
       addPlan: Array.isArray(parsedData.addPlan) ? parsedData.addPlan : [],
       addSave: Array.isArray(parsedData.addSave) ? parsedData.addSave : [],
       doneIds: Array.isArray(parsedData.doneIds) ? parsedData.doneIds : [],
     };
-  } catch {
+  }
+  catch{
     localStorage.removeItem(storageKey);
     cachedStorage = null;
-    cachedData = emptyData;
-  }
+    cachedData = emptyData;}
 
   return cachedData;
 };
 
 const subscribe = (onChange: () => void) => {
-  if (typeof window === "undefined") return () => {};
+  if(typeof window === "undefined") return () => {};
   window.addEventListener("storage", onChange);
   window.addEventListener("fitlog-data-change", onChange);
   return () => {
@@ -97,22 +97,19 @@ const DataProvider = ({ children }: { children: React.ReactNode }) => {
 
   const SetAddPlan: DataContextValue["SetAddPlan"] = (update) => {
     const currentData = getStoredData();
-    const nextPlan =
-      typeof update === "function" ? update(currentData.addPlan) : update;
+    const nextPlan = typeof update === "function" ? update(currentData.addPlan) : update;
     saveData({ ...currentData, addPlan: nextPlan });
   };
 
   const SetAddSave: DataContextValue["SetAddSave"] = (update) => {
     const currentData = getStoredData();
-    const nextSaved =
-      typeof update === "function" ? update(currentData.addSave) : update;
+    const nextSaved = typeof update === "function" ? update(currentData.addSave) : update;
     saveData({ ...currentData, addSave: nextSaved });
   };
 
   const SetDoneIds: DataContextValue["SetDoneIds"] = (update) => {
     const currentData = getStoredData();
-    const nextDoneIds =
-      typeof update === "function" ? update(currentData.doneIds) : update;
+    const nextDoneIds = typeof update === "function" ? update(currentData.doneIds) : update;
     saveData({ ...currentData, doneIds: nextDoneIds });
   };
 

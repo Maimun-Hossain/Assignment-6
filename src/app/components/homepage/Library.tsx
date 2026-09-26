@@ -1,6 +1,6 @@
 import React from "react";
 import { Oswald, Inter } from "next/font/google";
-import LibraryResults from "./LibraryResults";
+import LibraryResults from "@/app/components/homepage/LibraryResults";
 
 const oswald = Oswald();
 const inter = Inter();

@@ -5,14 +5,7 @@ import { useContext, useState } from "react";
 import { Oswald, Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaCheck,
-  FaFireFlameCurved,
-  FaRegClock,
-  FaRegStar,
-  FaXmark,
-  FaChevronDown,
-} from "react-icons/fa6";
+import { FaCheck, FaFireFlameCurved, FaRegClock, FaRegStar, FaXmark, FaChevronDown} from "react-icons/fa6";
 import { toast } from "react-toastify";
 
 const oswald = Oswald();
@@ -30,27 +23,19 @@ const Page = () => {
   } = useContext(DataContext);
 
   const [activeTab, setActiveTab] = useState<"today" | "saved">("today");
-  const [sortBy, setSortBy] = useState<
-    "duration" | "caloriesBurned" | "rating"
-  >("duration");
+  const [sortBy, setSortBy] = useState<"duration" | "caloriesBurned" | "rating">("duration");
 
   const workouts = activeTab === "today" ? addPlan : addSave;
-  const sortedWorkouts = [...workouts].sort(
-    (first, second) => first[sortBy] - second[sortBy],
-  );
+  const sortedWorkouts = [...workouts].sort((first, second) => first[sortBy] - second[sortBy]);
 
-  const totalMinutes = addPlan.reduce(
-    (total, workout) => total + workout.duration,
-    0,
-  );
+  const totalMinutes = addPlan.reduce((total, workout) => total + workout.duration,
+    0);
 
-  const totalCalories = addPlan.reduce(
-    (total, workout) => total + workout.caloriesBurned,
-    0,
-  );
+  const totalCalories = addPlan.reduce((total, workout) => total + workout.caloriesBurned,
+    0);
 
   const removeWorkout = (id: number) => {
-    if (activeTab === "today") {
+    if(activeTab === "today"){
       SetAddPlan((currentPlan) =>
         currentPlan.filter((workout) => workout.id !== id),
       );
@@ -58,7 +43,8 @@ const Page = () => {
       SetDoneIds((currentIds) =>
         currentIds.filter((workoutId) => workoutId !== id),
       );
-    } else {
+    }
+    else{
       SetAddSave((currentSaved) =>
         currentSaved.filter((workout) => workout.id !== id),
       );
@@ -81,7 +67,7 @@ const Page = () => {
     );
   };
 
-  if (!isHydrated) {
+  if(!isHydrated){
     return (
       <main
         className={`${inter.className} flex min-h-[calc(100vh-8rem)] items-center justify-center bg-[#0d0f12] text-sm text-gray-400`}
@@ -171,7 +157,7 @@ const Page = () => {
                   : "text-[#737985] hover:text-white"
               }`}
             >
-              Today&apos;s Plan
+              {`Today's Plan`}
             </button>
 
             <button

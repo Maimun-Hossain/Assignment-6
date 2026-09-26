@@ -7,15 +7,14 @@ const oswald = Oswald();
 const inter = Inter();
 
 const getData = async () => {
-  try{
+  try {
     const res = await fetch("https://api.api-store.workers.dev/api/fitlog", {
       next: { revalidate: 3600 },
     });
-    if(!res.ok) return [];
+    if (!res.ok) return [];
     const data = await res.json();
     return Array.isArray(data) ? data : [];
-  }
-  catch{
+  } catch {
     return [];
   }
 };

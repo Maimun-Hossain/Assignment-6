@@ -3,8 +3,7 @@
   themes: light --default;
 }
 
-html,
-body {
+html, body{
   min-height: 100%;
   background-color: #0c0d10;
 }
