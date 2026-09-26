@@ -6,7 +6,7 @@ const inter = Inter();
 
 export default function NotFound() {
   return (
-    <main
+    <div
       className={`${inter.className} flex min-h-[60vh] items-center justify-center px-6 py-20 text-white`}
     >
       <div className="w-full max-w-xl text-center">
@@ -26,6 +26,6 @@ export default function NotFound() {
           Back to workouts
         </Link>
       </div>
-    </main>
+    </div>
   );
 }

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Oswald, Inter } from "next/font/google";
 import { FaCalendarPlus, FaRegBookmark } from "react-icons/fa6";
 import { notFound } from "next/navigation";
+import AddPlanBtn from "@/app/components/PlanDetails/AddPlanBtn";
+import AddSaveBtn from "@/app/components/PlanDetails/AddSaveBtn";
 
 const oswald = Oswald();
 const inter = Inter();
@@ -111,13 +113,9 @@ const page = async ({ params }: IDataDetailsPageProps) => {
             </ol>
           </div>
           <div className="mt-6 flex gap-3">
-            <button className="rounded-lg bg-[#c6ff00] px-5 py-2.5 text-xs font-semibold text-black hover:bg-[#b5eb00] flex gap-2 items-center cursor-pointer">
-              <FaCalendarPlus /> Add to todays plan
-            </button>
+            <AddPlanBtn work={work}/>
 
-            <button className="rounded-lg border border-[#343945] px-5 py-2.5 text-xs text-gray-300 hover:bg-[#181b22] flex gap-2 items-center cursor-pointer">
-              <FaRegBookmark /> Save for later
-            </button>
+            <AddSaveBtn work={work}/>
           </div>
         </div>
       </div>
