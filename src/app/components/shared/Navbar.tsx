@@ -21,7 +21,9 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className={`navbar md:px-0 max-w-[97%] mx-auto ${inter.className}`}>
+    <div
+      className={`navbar md:px-0 max-w-[97%] mx-auto ${inter.className}`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -50,7 +52,9 @@ const Navbar = () => {
           </ul>
         </div>
         <Image src={logo} alt="logo" width={28} height={28}></Image>
-        <a className={`pl-2 text-xl font-bold text-white ${oswald.className}`}>FITLOG</a>
+        <a className={`pl-2 text-xl font-bold text-white ${oswald.className}`}>
+          FITLOG
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

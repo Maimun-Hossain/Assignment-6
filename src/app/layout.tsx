@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="bg-[#0C0D10]">
         <div className="">
-          <div className="border-b-2 border-b-[#1c1f26FF]">
+          <div className="sticky top-0 z-50 border-b-2 border-b-[#1c1f26FF] bg-[#0C0D10]">
             <Navbar></Navbar>
           </div>
           {children}
