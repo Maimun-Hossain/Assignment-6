@@ -2,6 +2,7 @@ import { IData } from "@/types/datas.type";
 import Image from "next/image";
 import { Oswald, Inter } from "next/font/google";
 import { FaCalendarPlus, FaRegBookmark } from "react-icons/fa6";
+import { notFound } from "next/navigation";
 
 const oswald = Oswald();
 const inter = Inter();
@@ -24,6 +25,7 @@ const page = async ({ params }: IDataDetailsPageProps) => {
   const work = workoutData.find(
     (data: IData) => data.id === Number(id),
   ) as IData;
+  if (!work) notFound();
   console.log(work);
   return (
     <main className="max-w-[97%] mx-auto py-8 text-white">
@@ -37,9 +39,7 @@ const page = async ({ params }: IDataDetailsPageProps) => {
           />
         </div>
         <div className={`${inter.className} flex flex-col`}>
-          <h1
-            className={`${oswald.className} text-3xl font-bold uppercase`}
-          >
+          <h1 className={`${oswald.className} text-3xl font-bold uppercase`}>
             {work.name}
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-5 text-gray-400">
@@ -100,9 +100,7 @@ const page = async ({ params }: IDataDetailsPageProps) => {
             </div>
           </div>
           <div className="mt-6">
-            <h2 className="text-sm font-bold uppercase">
-              Instructions
-            </h2>
+            <h2 className="text-sm font-bold uppercase">Instructions</h2>
             <ol className="mt-3 space-y-3 text-xs text-gray-300">
               {work.instructions.map((instruction, index) => (
                 <li key={index} className="flex gap-3">
