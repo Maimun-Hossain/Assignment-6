@@ -37,7 +37,6 @@ export default function LibraryResults({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search workouts or muscle groups"
-            aria-label="Search workouts or muscle groups"
             className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
           />
         </label>

@@ -39,12 +39,12 @@ const Page = () => {
     (first, second) => second[sortBy] - first[sortBy],
   );
 
-  const totalMinutes = addPlan.reduce(
+  const totalMinutes = workouts.reduce(
     (total, workout) => total + workout.duration,
     0,
   );
 
-  const totalCalories = addPlan.reduce(
+  const totalCalories = workouts.reduce(
     (total, workout) => total + workout.caloriesBurned,
     0,
   );
@@ -113,10 +113,7 @@ const Page = () => {
           </p>
         </header>
 
-        <section
-          aria-label="Today's plan summary"
-          className="mb-5 grid h-21 grid-cols-3 overflow-hidden rounded-[11px] border border-[#252933] bg-[#111318]"
-        >
+        <section className="mb-5 grid h-21 grid-cols-3 overflow-hidden rounded-[11px] border border-[#252933] bg-[#111318]">
           <div className="flex flex-col justify-center px-4 sm:px-5">
             <p className="text-xs leading-none text-[#858b96] sm:text-sm">
               Exercises
@@ -125,7 +122,7 @@ const Page = () => {
             <p
               className={`${oswald.className} mt-1 text-3xl font-bold leading-none text-[#c6ff00] sm:text-4xl`}
             >
-              {addPlan.length}
+              {workouts.length}
             </p>
           </div>
 
@@ -158,7 +155,6 @@ const Page = () => {
           <div
             className="flex h-9 items-center rounded-lg border border-[#20242c] bg-[#111318] p-0.5 sm:h-10"
             role="tablist"
-            aria-label="Plan lists"
           >
             <button
               type="button"
@@ -198,7 +194,6 @@ const Page = () => {
                 onChange={(event) =>
                   setSortBy(event.target.value as typeof sortBy)
                 }
-                aria-label="Sort workouts by"
                 className="h-9 appearance-none rounded-lg border border-[#292d36] bg-[#111318] py-0 pl-3 pr-8 text-xs text-[#d1d4da] outline-none transition hover:bg-[#171a20] sm:h-10 sm:text-sm"
               >
                 <option value="duration">Duration</option>
@@ -314,7 +309,6 @@ const Page = () => {
                     <button
                       type="button"
                       onClick={() => removeWorkout(workout.id)}
-                      aria-label={`Remove ${workout.name}`}
                       title="Remove workout"
                       className="flex h-7 w-6 items-center justify-center rounded-full text-xs text-[#858b96] transition hover:text-red-400"
                     >

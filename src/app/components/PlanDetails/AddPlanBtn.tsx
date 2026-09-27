@@ -12,7 +12,7 @@ const AddPlanBtn = ({ work }: { work: IData }) => {
 
   const handleAddPlan = () => {
     if(alreadyAdded){
-      toast.info("This workout is already in today's plan.");
+      toast.error(`${work.name} already in your plan.`);
       return;
     }
     if(atLimit){
@@ -26,10 +26,10 @@ const AddPlanBtn = ({ work }: { work: IData }) => {
   return (
     <button
       onClick={handleAddPlan}
-      disabled={atLimit || alreadyAdded}
+      disabled={atLimit && !alreadyAdded}
       className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#c6ff00] px-5 py-2.5 text-xs font-semibold text-black hover:bg-[#b5eb00] disabled:cursor-not-allowed disabled:opacity-50"
     >
-      <FaCalendarPlus /> Add to today&apos;s plan
+      <FaCalendarPlus /> {`Add to today's plan`}
     </button>
   );
 };

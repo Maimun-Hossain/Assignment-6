@@ -8,10 +8,15 @@ import { toast } from "react-toastify";
 const AddSaveBtn = ({ work }: { work: IData }) => {
   const { addSave, SetAddSave } = useContext(DataContext);
   const alreadySaved = addSave.some((item) => item.id === work.id);
+  const atLimit = addSave.length >= 5;
 
   const handleSave = () => {
-    if(alreadySaved){
-      toast.info("This workout is already saved.");
+    if (alreadySaved) {
+      toast.info(`${work.name} already saved for later.`);
+      return;
+    }
+    if (atLimit) {
+      toast.info("Saved workouts are limited to five.");
       return;
     }
     SetAddSave((currentSave) => [...currentSave, work]);
@@ -21,7 +26,7 @@ const AddSaveBtn = ({ work }: { work: IData }) => {
   return (
     <button
       onClick={handleSave}
-      disabled={alreadySaved}
+      disabled={atLimit && !alreadySaved}
       className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#343945] px-5 py-2.5 text-xs text-gray-300 hover:bg-[#181b22] disabled:cursor-not-allowed disabled:opacity-50"
     >
       <FaRegBookmark /> Save for later
