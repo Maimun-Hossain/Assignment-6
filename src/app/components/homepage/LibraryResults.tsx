@@ -25,7 +25,7 @@ export default function LibraryResults({
             muscle.toLowerCase().includes(search),
           ),
       )
-      .sort((first, second) => first[sortBy] - second[sortBy]);
+      .sort((first, second) => second[sortBy] - first[sortBy]);
   }, [query, sortBy, workoutData]);
 
   return (
