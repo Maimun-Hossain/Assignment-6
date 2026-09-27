@@ -12,8 +12,10 @@ const inter = Inter();
 const Navbar = () => {
   const pathname = usePathname();
   const { addPlan, addSave } = useContext(DataContext);
-  const linkClass = (href: string) =>
-    `transition-colors ${pathname === href ? "bg-[#1a2312FF] rounded-full text-[#c2f800FF]" : "text-[#9ca3afFF] hover:text-white"}`;
+  const linkClass = (href: string) => {
+    const isActive = href === "/" ? pathname !== "/my-plan" : pathname === href;
+    return `transition-colors ${isActive ? "bg-[#1a2312FF] rounded-full text-[#c2f800FF]" : "text-[#9ca3afFF] hover:text-white"}`;
+  };
   const links = (
     <>
       <li>
